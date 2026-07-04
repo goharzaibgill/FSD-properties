@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Admin Panel — FSD Properties</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background: var(--bg-cream);">
+
+  <!-- LOGIN SCREEN -->
+  <div class="admin-login" id="login-screen">
+    <div class="admin-login-card">
+      <h1><svg class="logo-svg" width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><path d="M8 30L32 8L56 30V56H40V40H24V56H8V30Z" fill="#c9a84c" stroke="#1a1a1a" stroke-width="3"/><rect x="28" y="44" width="8" height="12" fill="#1a1a1a"/><circle cx="32" cy="26" r="4" fill="#1a1a1a"/></svg> Admin Panel</h1>
+      <p>FSD Properties Management</p>
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label>Password</label>
+        <input type="password" id="admin-password" placeholder="Enter admin password">
+      </div>
+      <button class="btn btn-primary" style="width: 100%;" onclick="loginAdmin()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg> Login
+      </button>
+      <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted);">Hint: admin123</p>
+    </div>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div id="admin-dashboard" style="display: none;">
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="navbar-logo">
+          <svg class="logo-svg" width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 30L32 8L56 30V56H40V40H24V56H8V30Z" fill="#c9a84c" stroke="#1a1a1a" stroke-width="3"/>
+            <rect x="28" y="44" width="8" height="12" fill="#1a1a1a"/>
+            <circle cx="32" cy="26" r="4" fill="#1a1a1a"/>
+          </svg>
+          FSD <span>Properties</span> <span class="badge badge-dark" style="font-size: 0.65rem; margin-left: 8px;">ADMIN</span>
+        </a>
+        <div class="navbar-links">
+          <a href="index.html">View Site</a>
+          <a href="properties.html">Properties</a>
+        </div>
+        <button class="btn btn-sm btn-outline" onclick="logoutAdmin()" style="color: var(--danger); border-color: var(--danger);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg> Logout
+        </button>
+      </div>
+    </nav>
+
+    <div class="admin-dashboard">
+      <div class="container">
+        <!-- STATS -->
+        <div class="admin-stats" id="admin-stats"></div>
+
+        <!-- QUICK ACTIONS -->
+        <div style="display: flex; gap: 12px; margin-bottom: 32px;">
+          <button class="btn btn-primary" onclick="openAddModal('property')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M12 4v16m8-8H4"/></svg> Add Property
+          </button>
+          <button class="btn btn-dark" onclick="openAddModal('agent')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg> Add Agent
+          </button>
+        </div>
+
+        <!-- PROPERTIES TABLE -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <h2>All Properties</h2>
+            <input type="text" id="admin-property-search" placeholder="Search properties..." oninput="renderAdminProperties()" style="width: 250px; padding: 8px 14px; font-size: 0.85rem;">
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Area</th>
+                  <th>Price</th>
+                  <th>Purpose</th>
+                  <th>Views</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-properties-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- AGENTS TABLE -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <h2>All Agents</h2>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Specialization</th>
+                  <th>Experience</th>
+                  <th>Rating</th>
+                  <th>Verified</th>
+                  <th>Listings</th>
+                </tr>
+              </thead>
+              <tbody id="admin-agents-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SUBMISSIONS -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <h2>User Submissions</h2>
+          </div>
+          <div id="admin-submissions"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD PROPERTY MODAL -->
+  <div class="modal-overlay" id="add-property-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Add New Property</h2>
+        <button class="modal-close" onclick="closeModal('add-property-modal')">&times;</button>
+      </div>
+      <form onsubmit="addNewProperty(event)">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>Title</label>
+          <input type="text" id="new-prop-title" required>
+        </div>
+        <div class="form-row" style="margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Type</label>
+            <select id="new-prop-type" required>
+              <option value="House">House</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Plot">Plot</option>
+              <option value="Shop">Shop</option>
+              <option value="Office">Office</option>
+              <option value="Warehouse">Warehouse</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Purpose</label>
+            <select id="new-prop-purpose" required>
+              <option value="Buy">Buy</option>
+              <option value="Rent">Rent</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row" style="margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Price (PKR)</label>
+            <input type="number" id="new-prop-price" required>
+          </div>
+          <div class="form-group">
+            <label>Area</label>
+            <select id="new-prop-area" required></select>
+          </div>
+        </div>
+        <div class="form-row" style="margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Bedrooms</label>
+            <input type="number" id="new-prop-beds" min="0" value="3">
+          </div>
+          <div class="form-group">
+            <label>Bathrooms</label>
+            <input type="number" id="new-prop-baths" min="0" value="2">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>Size</label>
+          <input type="text" id="new-prop-size" placeholder="e.g. 10 Marla">
+        </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>Description</label>
+          <textarea id="new-prop-desc" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M12 4v16m8-8H4"/></svg> Add Property
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD AGENT MODAL -->
+  <div class="modal-overlay" id="add-agent-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Add New Agent</h2>
+        <button class="modal-close" onclick="closeModal('add-agent-modal')">&times;</button>
+      </div>
+      <form onsubmit="addNewAgent(event)">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>Name</label>
+          <input type="text" id="new-agent-name" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>Specialization</label>
+          <input type="text" id="new-agent-spec" placeholder="e.g. Susan Road, Gulberg">
+        </div>
+        <div class="form-row" style="margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" id="new-agent-phone" required>
+          </div>
+          <div class="form-group">
+            <label>WhatsApp</label>
+            <input type="tel" id="new-agent-whatsapp">
+          </div>
+        </div>
+        <div class="form-row" style="margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Experience (years)</label>
+            <input type="number" id="new-agent-exp" min="0" value="3">
+          </div>
+          <div class="form-group">
+            <label>Rating</label>
+            <input type="number" id="new-agent-rating" min="0" max="5" step="0.1" value="4.5">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg> Add Agent
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span id="toast-message"></span>
+  </div>
+
+  <script src="js/icons.js"></script>`n  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('admin-password').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') loginAdmin();
+      });
+    });
+
+    function loginAdmin() {
+      const pass = document.getElementById('admin-password').value;
+      if (pass === getAdminPassword()) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'block';
+        renderAdminDashboard();
+      } else {
+        showToast('Galat password!');
+      }
+    }
+
+    function logoutAdmin() {
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('admin-dashboard').style.display = 'none';
+      document.getElementById('admin-password').value = '';
+    }
+
+    function renderAdminDashboard() {
+      const submitted = getSubmittedProperties();
+      document.getElementById('admin-stats').innerHTML =
+        '<div class="admin-stat-card"><div class="label">Total Properties</div><div class="value">' + properties.length + '</div></div>' +
+        '<div class="admin-stat-card"><div class="label">Total Agents</div><div class="value">' + agents.length + '</div></div>' +
+        '<div class="admin-stat-card"><div class="label">Saved Properties</div><div class="value">' + getSavedProperties().length + '</div></div>' +
+        '<div class="admin-stat-card"><div class="label">Submissions</div><div class="value">' + submitted.length + '</div></div>';
+
+      renderAdminProperties();
+      renderAdminAgents();
+      renderAdminSubmissions();
+    }
+
+    function renderAdminProperties() {
+      const search = (document.getElementById('admin-property-search')?.value || '').toLowerCase();
+      const filtered = properties.filter(p => !search || p.title.toLowerCase().includes(search) || p.area.toLowerCase().includes(search));
+      document.getElementById('admin-properties-body').innerHTML = filtered.map(p =>
+        '<tr>' +
+          '<td>#' + p.id + '</td>' +
+          '<td>' + p.title + '</td>' +
+          '<td><span class="badge badge-dark">' + p.type + '</span></td>' +
+          '<td>' + p.area + '</td>' +
+          '<td style="color: var(--gold); font-weight: 600;">PKR ' + p.priceDisplay + '</td>' +
+          '<td>' + p.purpose + '</td>' +
+          '<td>' + p.views + '</td>' +
+          '<td class="actions">' +
+            '<button class="btn btn-sm btn-outline" onclick="showToast(\'Edit coming soon\')"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>' +
+            '<button class="btn btn-sm btn-danger" onclick="deleteProperty(' + p.id + ')"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>' +
+          '</td>' +
+        '</tr>'
+      ).join('');
+    }
+
+    function renderAdminAgents() {
+      document.getElementById('admin-agents-body').innerHTML = agents.map(a => {
+        const listings = properties.filter(p => p.agentId === a.id).length;
+        return '<tr>' +
+          '<td>#' + a.id + '</td>' +
+          '<td>' + a.name + '</td>' +
+          '<td>' + a.specialization + '</td>' +
+          '<td>' + a.experience + ' years</td>' +
+          '<td style="color: var(--gold);">' + a.rating + ' <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" class="svg-icon"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg> style="font-size: 0.75rem;"></i></td>' +
+          '<td>' + (a.verified ? '<span class="badge badge-success">Verified</span>' : '<span class="badge badge-dark">Pending</span>') + '</td>' +
+          '<td>' + listings + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    function renderAdminSubmissions() {
+      const submitted = getSubmittedProperties();
+      if (submitted.length === 0) {
+        document.getElementById('admin-submissions').innerHTML = '<p style="color: var(--text-muted); padding: 20px;">No submissions yet</p>';
+        return;
+      }
+      document.getElementById('admin-submissions').innerHTML = submitted.map(s =>
+        '<div style="padding: 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">' +
+          '<div><strong>' + s.title + '</strong> — ' + s.area + ' — PKR ' + s.price + '</div>' +
+          '<div style="color: var(--text-muted); font-size: 0.85rem;">' + s.postedDate + '</div>' +
+        '</div>'
+      ).join('');
+    }
+
+    function deleteProperty(id) {
+      if (confirm('Yeh property delete karni hai?')) {
+        showToast('Property deleted');
+        renderAdminProperties();
+      }
+    }
+
+    function openAddModal(type) {
+      document.getElementById(type === 'property' ? 'add-property-modal' : 'add-agent-modal').classList.add('active');
+      if (type === 'property') {
+        const areaSelect = document.getElementById('new-prop-area');
+        if (areaSelect.options.length <= 1) {
+          faislalabadAreas.forEach(area => {
+            const opt = document.createElement('option');
+            opt.value = area;
+            opt.textContent = area;
+            areaSelect.appendChild(opt);
+          });
+        }
+      }
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    function addNewProperty(e) {
+      e.preventDefault();
+      const data = {
+        id: Date.now(),
+        title: document.getElementById('new-prop-title').value,
+        type: document.getElementById('new-prop-type').value,
+        purpose: document.getElementById('new-prop-purpose').value,
+        price: parseInt(document.getElementById('new-prop-price').value),
+        priceDisplay: formatPrice(document.getElementById('new-prop-price').value),
+        area: document.getElementById('new-prop-area').value,
+        city: 'Faisalabad',
+        address: document.getElementById('new-prop-area').value + ', Faisalabad',
+        bedrooms: parseInt(document.getElementById('new-prop-beds').value) || 0,
+        bathrooms: parseInt(document.getElementById('new-prop-baths').value) || 0,
+        size: document.getElementById('new-prop-size').value || 'N/A',
+        sizeValue: 10,
+        floor: 'N/A',
+        furnishing: 'Unfurnished',
+        description: document.getElementById('new-prop-desc').value,
+        features: ['Gas', 'Electricity', 'Water'],
+        agentId: 1,
+        images: [],
+        featured: false,
+        views: 0,
+        postedDate: new Date().toISOString().split('T')[0],
+        color: '#c9a84c'
+      };
+      properties.push(data);
+      renderAdminDashboard();
+      closeModal('add-property-modal');
+      showToast('Property added!');
+      e.target.reset();
+    }
+
+    function addNewAgent(e) {
+      e.preventDefault();
+      const data = {
+        id: Date.now(),
+        name: document.getElementById('new-agent-name').value,
+        verified: false,
+        experience: parseInt(document.getElementById('new-agent-exp').value) || 0,
+        specialization: document.getElementById('new-agent-spec').value,
+        phone: document.getElementById('new-agent-phone').value,
+        whatsapp: document.getElementById('new-agent-whatsapp').value || '',
+        rating: parseFloat(document.getElementById('new-agent-rating').value) || 4.5,
+        reviews: 0,
+        bio: 'New agent on FSD Properties',
+        color: '#1a1a1a',
+        listings: 0
+      };
+      agents.push(data);
+      renderAdminDashboard();
+      closeModal('add-agent-modal');
+      showToast('Agent added!');
+      e.target.reset();
+    }
+
+    function formatPrice(num) {
+      num = parseInt(num);
+      if (num >= 10000000) return (num / 10000000).toFixed(1) + ' Crore';
+      if (num >= 100000) return (num / 100000).toFixed(0) + ' Lakh';
+      return num.toLocaleString('en-PK');
+    }
+  </script>
+</body>
+</html>

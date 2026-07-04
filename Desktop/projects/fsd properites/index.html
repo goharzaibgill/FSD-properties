@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>FSD Properties | Faisalabad Ka #1 Property Portal</title>
+  <meta name="description" content="Faisalabad's most trusted property portal. Find houses, plots, apartments, shops, and offices for sale or rent. Verified listings and expert agents.">
+  <meta property="og:title" content="FSD Properties — Faisalabad Ka #1 Property Portal">
+  <meta property="og:description" content="Find your dream property in Faisalabad. Premium listings, verified agents, and trusted service.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fsdproperties.com">
+  <link rel="canonical" href="https://fsdproperties.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-logo">
+        <svg class="logo-svg" width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 30L32 8L56 30V56H40V40H24V56H8V30Z" fill="#c9a84c" stroke="#1a1a1a" stroke-width="3"/>
+          <rect x="28" y="44" width="8" height="12" fill="#1a1a1a"/>
+          <circle cx="32" cy="26" r="4" fill="#1a1a1a"/>
+        </svg>
+        FSD <span>Properties</span>
+      </a>
+      <div class="navbar-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="properties.html">Properties</a>
+        <a href="agents.html">Agents</a>
+        <a href="calculator.html">Calculator</a>
+        <a href="submit.html">Submit Property</a>
+      </div>
+      <a href="saved.html" class="navbar-saved" id="nav-saved">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        Saved (<span id="saved-count">0</span>)
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="properties.html">Properties</a>
+    <a href="agents.html">Agents</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="submit.html">Submit Property</a>
+    <a href="saved.html">Saved Properties</a>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Find Your Dream Property in <span>Faisalabad</span></h1>
+      <p>Faisalabad's most trusted property portal — buy, sell, or rent with confidence</p>
+      <div class="hero-search">
+        <select id="search-purpose">
+          <option value="Buy">Buy</option>
+          <option value="Rent">Rent</option>
+          <option value="Sell">Sell</option>
+        </select>
+        <select id="search-area">
+          <option value="">All Areas</option>
+        </select>
+        <input type="text" id="search-budget" placeholder="Budget (e.g. 50 Lakh, 1 Crore)">
+        <button class="btn btn-primary" onclick="heroSearch()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg> Search
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" data-target="500">0</div>
+          <div class="stat-label">Properties</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="50">0</div>
+          <div class="stat-label">Verified Agents</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="25">0</div>
+          <div class="stat-label">Areas Covered</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="1000">0</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROPERTIES -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Featured Properties</h2>
+        <p class="section-subtitle">Handpicked premium properties in Faisalabad</p>
+      </div>
+      <div class="featured-grid" id="featured-properties"></div>
+      <div class="text-center" style="margin-top: 40px;">
+        <a href="properties.html" class="btn btn-primary btn-lg">
+          View All Properties <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPERTY CATEGORIES -->
+  <section class="section-padding" style="background: var(--card-bg);">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Property Categories</h2>
+        <p class="section-subtitle">Explore properties by type</p>
+      </div>
+      <div class="categories-grid">
+        <a href="properties.html?type=House" class="category-card">
+          <div class="category-card-icon" id="cat-icon-house"></div>
+          <div class="category-card-name">Houses</div>
+          <div class="category-card-count" id="count-houses">0 listings</div>
+        </a>
+        <a href="properties.html?type=Apartment" class="category-card">
+          <div class="category-card-icon" id="cat-icon-apartment"></div>
+          <div class="category-card-name">Apartments</div>
+          <div class="category-card-count" id="count-apartments">0 listings</div>
+        </a>
+        <a href="properties.html?type=Plot" class="category-card">
+          <div class="category-card-icon" id="cat-icon-plot"></div>
+          <div class="category-card-name">Plots</div>
+          <div class="category-card-count" id="count-plots">0 listings</div>
+        </a>
+        <a href="properties.html?type=Shop" class="category-card">
+          <div class="category-card-icon" id="cat-icon-commercial"></div>
+          <div class="category-card-name">Commercial</div>
+          <div class="category-card-count" id="count-shops">0 listings</div>
+        </a>
+        <a href="properties.html?type=Office" class="category-card">
+          <div class="category-card-icon" id="cat-icon-office"></div>
+          <div class="category-card-name">Offices</div>
+          <div class="category-card-count" id="count-offices">0 listings</div>
+        </a>
+        <a href="properties.html?type=Warehouse" class="category-card">
+          <div class="category-card-icon" id="cat-icon-warehouse"></div>
+          <div class="category-card-name">Warehouses</div>
+          <div class="category-card-count" id="count-warehouses">0 listings</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR AREAS -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Popular Areas in Faisalabad</h2>
+        <p class="section-subtitle">Find properties in the best neighborhoods</p>
+      </div>
+      <div class="areas-grid" id="areas-grid"></div>
+    </div>
+  </section>
+
+  <!-- FEATURED AGENTS -->
+  <section class="section-padding" style="background: var(--card-bg);">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Featured Agents</h2>
+        <p class="section-subtitle">Connect with Faisalabad's best real estate professionals</p>
+      </div>
+      <div class="agents-grid" id="featured-agents"></div>
+      <div class="text-center" style="margin-top: 40px;">
+        <a href="agents.html" class="btn btn-outline btn-lg">
+          View All Agents <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Why Choose FSD Properties</h2>
+        <p class="section-subtitle">What makes us Faisalabad's #1 property portal</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="why-card-title">Verified Listings</div>
+          <div class="why-card-text">Every property is verified by our team before listing. No fake ads, no wasted time.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div class="why-card-title">Secure Transactions</div>
+          <div class="why-card-text">Your data and transactions are safe with us. We prioritize your security.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="why-card-title">Expert Agents</div>
+          <div class="why-card-text">Our agents know Faisalabad inside out. They'll find you the perfect property.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <div class="why-card-title">Easy Contact</div>
+          <div class="why-card-text">Call, WhatsApp, or visit — reach agents instantly with one click.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-brand">
+            <svg class="logo-svg" width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 30L32 8L56 30V56H40V40H24V56H8V30Z" fill="#c9a84c" stroke="#1a1a1a" stroke-width="3"/>
+              <rect x="28" y="44" width="8" height="12" fill="#1a1a1a"/>
+              <circle cx="32" cy="26" r="4" fill="#1a1a1a"/>
+            </svg>
+            FSD <span>Properties</span>
+          </div>
+          <p>Faisalabad's first dedicated premium property portal. Connecting buyers, sellers, renters, and agents since 2026. Your dream property is just a search away.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2z"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><path d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <div class="footer-links">
+            <a href="properties.html">Browse Properties</a>
+            <a href="agents.html">Our Agents</a>
+            <a href="calculator.html">Mortgage Calculator</a>
+            <a href="submit.html">Submit Property</a>
+            <a href="saved.html">Saved Properties</a>
+            <a href="admin.html">Admin Panel</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Popular Areas</h4>
+          <div class="footer-links">
+            <a href="properties.html?area=Susan Road">Susan Road</a>
+            <a href="properties.html?area=Gulberg Colony">Gulberg Colony</a>
+            <a href="properties.html?area=Canal Road">Canal Road</a>
+            <a href="properties.html?area=Madina Town">Madina Town</a>
+            <a href="properties.html?area=D-Ground">D-Ground</a>
+            <a href="properties.html?area=Civil Lines">Civil Lines</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Contact Us</h4>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <span>+92 307 4851435</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            <span>+92 307 4851435</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>info@fsdproperties.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Office #12, D-Ground Plaza, Faisalabad, Pakistan</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 <span>FSD Properties</span> — Faisalabad Ka #1 Property Portal. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span id="toast-message"></span>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      renderCategoryIcons();
+      renderFeaturedProperties();
+      renderCategoryCounts();
+      renderPopularAreas();
+      renderFeaturedAgents();
+      initHeroSearch();
+      initCountUp();
+    });
+
+    function renderCategoryIcons() {
+      var icons = {
+        'cat-icon-house': CATEGORY_ICONS.house,
+        'cat-icon-apartment': CATEGORY_ICONS.apartment,
+        'cat-icon-plot': CATEGORY_ICONS.plot,
+        'cat-icon-commercial': CATEGORY_ICONS.commercial,
+        'cat-icon-office': CATEGORY_ICONS.office,
+        'cat-icon-warehouse': CATEGORY_ICONS.warehouse
+      };
+      for (var [id, svg] of Object.entries(icons)) {
+        var el = document.getElementById(id);
+        if (el) el.innerHTML = svg;
+      }
+    }
+
+    function renderFeaturedProperties() {
+      const container = document.getElementById('featured-properties');
+      const featured = properties.filter(p => p.featured).slice(0, 4);
+      container.innerHTML = featured.map(p => createFeaturedCard(p)).join('');
+    }
+
+    function createFeaturedCard(p) {
+      var agent = getAgentById(p.agentId);
+      var saved = isPropertySaved(p.id);
+      var purposeBadgeClass = p.purpose === 'Rent' ? 'badge-rent' : 'badge-sale';
+      var purposeBadgeText = p.purpose === 'Rent' ? 'FOR RENT' : 'FOR SALE';
+
+      var imgSrc = (p.images && p.images.length > 0) ? p.images[0] : '';
+      var imgHtml = imgSrc ? '<img src="' + imgSrc + '" alt="' + p.title + '" loading="lazy">' : '<div class="property-placeholder">' + SVG.image + '</div>';
+
+      var bedsHtml = p.bedrooms > 0 ? '<div class="property-card-detail">' + SVG.bed + ' ' + p.bedrooms + ' Beds</div>' : '';
+      var bathsHtml = p.bathrooms > 0 ? '<div class="property-card-detail">' + SVG.bath + ' ' + p.bathrooms + ' Baths</div>' : '';
+
+      var agentHtml = agent ? '<div class="property-card-agent-info"><div class="property-card-agent-avatar" style="background:' + agent.color + ';">' + agent.name.split(' ').map(function(n){return n[0];}).join('') + '</div><span class="property-card-agent-name">' + agent.name + '</span></div>' : '';
+
+      return '<div class="property-card featured-card">' +
+        '<div class="property-card-image">' +
+          imgHtml +
+          '<div class="property-card-badges">' +
+            (p.featured ? '<span class="badge badge-gold">Featured</span>' : '') +
+            '<span class="badge badge-dark">' + p.type + '</span>' +
+            '<span class="badge ' + purposeBadgeClass + '">' + purposeBadgeText + '</span>' +
+          '</div>' +
+          '<button class="property-card-save ' + (saved ? 'saved' : '') + '" onclick="toggleSaveFromCard(event, ' + p.id + ')">' + SVG.heart + '</button>' +
+        '</div>' +
+        '<div class="property-card-body">' +
+          '<div class="property-card-price price-shimmer">' + (p.purpose === 'Rent' ? 'PKR ' + p.priceDisplay : 'PKR ' + p.priceDisplay) + '</div>' +
+          '<h3 class="property-card-title"><a href="detail.html?id=' + p.id + '">' + p.title + '</a></h3>' +
+          '<div class="property-card-location">' + SVG.mapPin + ' ' + p.area + ', Faisalabad</div>' +
+          '<div class="property-card-details">' + bedsHtml + bathsHtml + '<div class="property-card-detail">' + SVG.ruler + ' ' + p.size + '</div></div>' +
+          '<div class="property-card-agent">' + agentHtml + '<a href="detail.html?id=' + p.id + '" class="property-card-view">View Details ' + SVG.arrowRight + '</a></div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function renderCategoryCounts() {
+      const types = { House: 'houses', Apartment: 'apartments', Plot: 'plots', Shop: 'shops', Office: 'offices', Warehouse: 'warehouses' };
+      for (const [type, id] of Object.entries(types)) {
+        const count = properties.filter(p => p.type === type).length;
+        const el = document.getElementById('count-' + id);
+        if (el) el.textContent = count + ' listings';
+      }
+    }
+
+    function renderPopularAreas() {
+      const container = document.getElementById('areas-grid');
+      const popularAreas = [
+        'Susan Road', 'Peoples Colony No.1', 'Gulberg Colony', 'Madina Town', 'Jinnah Colony',
+        'Canal Road', 'Satyana Road', 'Ghulam Muhammad Abad', 'Millat Road', 'Kohinoor City'
+      ];
+      container.innerHTML = popularAreas.map(area => {
+        const count = properties.filter(p => p.area === area).length;
+        return '<a href="properties.html?area=' + encodeURIComponent(area) + '" class="area-card">' +
+          '<div class="area-card-name">' + area + '</div>' +
+          '<div class="area-card-count">' + count + ' properties</div>' +
+        '</a>';
+      }).join('');
+    }
+
+    function renderFeaturedAgents() {
+      const container = document.getElementById('featured-agents');
+      const featured = agents.filter(a => a.verified).slice(0, 4);
+      container.innerHTML = featured.map(a => createAgentCard(a)).join('');
+    }
+
+    function initHeroSearch() {
+      const areaSelect = document.getElementById('search-area');
+      faislalabadAreas.forEach(area => {
+        const opt = document.createElement('option');
+        opt.value = area;
+        opt.textContent = area;
+        areaSelect.appendChild(opt);
+      });
+    }
+
+    function heroSearch() {
+      const purpose = document.getElementById('search-purpose').value;
+      const area = document.getElementById('search-area').value;
+      const budget = document.getElementById('search-budget').value;
+      let url = 'properties.html?purpose=' + encodeURIComponent(purpose);
+      if (area) url += '&area=' + encodeURIComponent(area);
+      if (budget) url += '&budget=' + encodeURIComponent(budget);
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>

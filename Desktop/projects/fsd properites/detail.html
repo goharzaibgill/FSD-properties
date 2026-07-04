@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Property Detail — FSD Properties</title>
+  <meta name="description" content="View property details, photos, and contact the agent on FSD Properties.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-logo">
+        <svg class="logo-svg" width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 30L32 8L56 30V56H40V40H24V56H8V30Z" fill="#c9a84c" stroke="#1a1a1a" stroke-width="3"/>
+          <rect x="28" y="44" width="8" height="12" fill="#1a1a1a"/>
+          <circle cx="32" cy="26" r="4" fill="#1a1a1a"/>
+        </svg>
+        FSD <span>Properties</span>
+      </a>
+      <div class="navbar-links">
+        <a href="index.html">Home</a>
+        <a href="properties.html">Properties</a>
+        <a href="agents.html">Agents</a>
+        <a href="calculator.html">Calculator</a>
+        <a href="submit.html">Submit Property</a>
+      </div>
+      <a href="saved.html" class="navbar-saved" id="nav-saved">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        Saved (<span id="saved-count">0</span>)
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="properties.html">Properties</a>
+    <a href="agents.html">Agents</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="submit.html">Submit Property</a>
+    <a href="saved.html">Saved Properties</a>
+  </div>
+
+  <!-- DETAIL HEADER -->
+  <section class="detail-header" id="detail-header"></section>
+
+  <!-- DETAIL BODY -->
+  <section class="detail-body">
+    <div class="container">
+      <div class="detail-layout" id="detail-layout">
+        <!-- Main Content -->
+        <div id="detail-main"></div>
+        <!-- Agent Sidebar -->
+        <div id="detail-sidebar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMILAR PROPERTIES -->
+  <section class="similar-section" id="similar-section"></section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-brand">
+                        <svg class="logo-svg" width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 30L32 8L56 30V56H40V40H24V56H8V30Z" fill="#c9a84c" stroke="#1a1a1a" stroke-width="3"/>
+              <rect x="28" y="44" width="8" height="12" fill="#1a1a1a"/>
+              <circle cx="32" cy="26" r="4" fill="#1a1a1a"/>
+            </svg> FSD <span>Properties</span>
+          </div>
+          <p>Faisalabad's first dedicated premium property portal. Connecting buyers, sellers, renters, and agents since 2026.</p>
+          <div class="footer-social">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2z"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><path d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <div class="footer-links">
+            <a href="properties.html">Browse Properties</a>
+            <a href="agents.html">Our Agents</a>
+            <a href="calculator.html">Mortgage Calculator</a>
+            <a href="submit.html">Submit Property</a>
+            <a href="saved.html">Saved Properties</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Popular Areas</h4>
+          <div class="footer-links">
+            <a href="properties.html?area=Susan Road">Susan Road</a>
+            <a href="properties.html?area=Gulberg Colony">Gulberg Colony</a>
+            <a href="properties.html?area=Canal Road">Canal Road</a>
+            <a href="properties.html?area=Madina Town">Madina Town</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Contact Us</h4>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <span>+92 307 4851435</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            <span>+92 307 4851435</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>info@fsdproperties.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 <span>FSD Properties</span> — Faisalabad Ka #1 Property Portal. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <div class="lightbox-image" id="lightbox-content">
+      <img id="lightbox-img" src="" alt="Full image" style="max-width:90vw;max-height:90vh;object-fit:contain;">
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span id="toast-message"></span>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    var SVGI = {
+      chevron: '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M9 5l7 7-7 7"/></svg>',
+      mapPin: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>',
+      eye: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>',
+      image: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>',
+      imageSm: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>',
+      bed: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11M8 14v3m4-3v3m4-3v3"/></svg>',
+      bath: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1zM6 12V5a2 2 0 012-2h2a2 2 0 012 2v7"/></svg>',
+      ruler: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1zM9 10h2m-2 4h2m4-8h0m0 4h0m0 4h0"/></svg>',
+      layers: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
+      couch: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M5 11a2 2 0 012-2h10a2 2 0 012 2v4a2 2 0 01-2 2H7a2 2 0 01-2-2v-4zM3 11V8a2 2 0 012-2h14a2 2 0 012 2v3M5 17v2m14-2v2"/></svg>',
+      calendar: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>',
+      car: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M5 17h14M5 17a2 2 0 01-2-2V9a2 2 0 012-2h1l2-3h8l2 3h1a2 2 0 012 2v6a2 2 0 01-2 2M7 17a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4z"/></svg>',
+      check: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon" style="color: var(--success);"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+      xMark: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon" style="color: var(--text-muted);"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+      heart: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>',
+      whatsapp: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>',
+      link: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>',
+      phone: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>',
+      checkCircle: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon" style="color: var(--success);"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+      calendarCheck: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/><path d="M9 12l2 2 4-4"/></svg>',
+      mapMarked: '<svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M9 12l2 2 4-4"/></svg>'
+    };
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'));
+      if (!id) {
+        window.location.href = 'properties.html';
+        return;
+      }
+      const property = getPropertyById(id);
+      if (!property) {
+        window.location.href = 'properties.html';
+        return;
+      }
+
+      currentProperty = property;
+
+      property.views++;
+      document.title = property.title + ' — FSD Properties';
+
+      renderDetailHeader(property);
+      renderDetailMain(property);
+      renderAgentSidebar(property);
+      renderSimilarProperties(property);
+    });
+
+    function renderDetailHeader(p) {
+      const agent = getAgentById(p.agentId);
+      document.getElementById('detail-header').innerHTML =
+        '<div class="container">' +
+          '<div class="detail-breadcrumb">' +
+            '<a href="index.html">Home</a> ' + SVGI.chevron + ' ' +
+            '<a href="properties.html">Properties</a> ' + SVGI.chevron + ' ' +
+            '<a href="properties.html?area=' + encodeURIComponent(p.area) + '">' + p.area + '</a> ' + SVGI.chevron + ' ' +
+            '<span>' + p.title + '</span>' +
+          '</div>' +
+          '<h1>' + p.title + '</h1>' +
+          '<div class="detail-header-price price-shimmer">' + (p.purpose === 'Rent' ? 'PKR ' + p.priceDisplay + '/month' : 'PKR ' + p.priceDisplay) + '</div>' +
+          '<div class="detail-header-meta">' +
+            '<span class="badge badge-' + (p.purpose === 'Rent' ? 'rent' : 'sale') + '">' + (p.purpose === 'Rent' ? 'FOR RENT' : 'FOR SALE') + '</span>' +
+            '<span class="badge badge-dark">' + p.type + '</span>' +
+            '<span style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">' + SVGI.mapPin + ' ' + p.area + ', Faisalabad</span>' +
+            '<span style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">' + SVGI.eye + ' ' + p.views + ' views</span>' +
+          '</div>' +
+        '</div>';
+    }
+
+    function renderDetailMain(p) {
+      const allFeatures = ['Gas', 'Electricity', 'Water', 'Internet', 'Generator', 'Security', 'Boundary Wall', 'Garden', 'Parking', 'Lift', 'Swimming Pool'];
+
+      var galleryMainStyle = '';
+      var galleryMainContent = '';
+      var thumbsHtml = '';
+
+      if (p.images && p.images.length > 0) {
+        galleryMainStyle = 'cursor: zoom-in;';
+        galleryMainContent = '<img src="' + p.images[0] + '" alt="' + p.title + '" id="gallery-main-img" style="width:100%;height:100%;object-fit:cover;">';
+        for (var i = 0; i < Math.min(p.images.length, 4); i++) {
+          thumbsHtml += '<div class="gallery-thumb' + (i === 0 ? ' active' : '') + '" onclick="changeGalleryImage(' + i + ')" style="cursor:pointer;"><img src="' + p.images[i] + '" alt="Thumb ' + (i+1) + '" style="width:100%;height:100%;object-fit:cover;"></div>';
+        }
+      } else {
+        galleryMainStyle = 'background: linear-gradient(135deg, ' + p.color + ', ' + (p.color === '#c9a84c' ? '#1a1a1a' : '#c9a84c') + ');';
+        galleryMainContent = SVGI.image;
+        thumbsHtml =
+          '<div class="gallery-thumb active" style="background: linear-gradient(135deg, ' + p.color + ', #2c2c2c);">' + SVGI.imageSm + '</div>' +
+          '<div class="gallery-thumb" style="background: linear-gradient(135deg, #2c2c2c, ' + p.color + ');">' + SVGI.imageSm + '</div>' +
+          '<div class="gallery-thumb" style="background: linear-gradient(135deg, ' + (p.color === '#c9a84c' ? '#1a1a1a' : '#c9a84c') + ', #2c2c2c);">' + SVGI.imageSm + '</div>' +
+          '<div class="gallery-thumb" style="background: linear-gradient(135deg, #2c2c2c, ' + (p.color === '#c9a84c' ? '#1a1a1a' : '#c9a84c') + ');">' + SVGI.imageSm + '</div>';
+      }
+
+      let mainHTML =
+        '<div class="gallery">' +
+          '<div class="gallery-main" onclick="openLightbox()" style="' + galleryMainStyle + '">' +
+            galleryMainContent +
+          '</div>' +
+          '<div class="gallery-thumbs">' +
+            thumbsHtml +
+          '</div>' +
+        '</div>';
+
+      mainHTML +=
+        '<div class="detail-section">' +
+          '<h2 class="detail-section-title">Key Details</h2>' +
+          '<div class="detail-grid">' +
+            (p.bedrooms > 0 ? '<div class="detail-grid-item">' + SVGI.bed + '<div class="value">' + p.bedrooms + '</div><div class="label">Bedrooms</div></div>' : '') +
+            (p.bathrooms > 0 ? '<div class="detail-grid-item">' + SVGI.bath + '<div class="value">' + p.bathrooms + '</div><div class="label">Bathrooms</div></div>' : '') +
+            '<div class="detail-grid-item">' + SVGI.ruler + '<div class="value">' + p.size + '</div><div class="label">Size</div></div>' +
+            '<div class="detail-grid-item">' + SVGI.layers + '<div class="value">' + p.floor + '</div><div class="label">Floor</div></div>' +
+            '<div class="detail-grid-item">' + SVGI.couch + '<div class="value">' + p.furnishing + '</div><div class="label">Furnishing</div></div>' +
+            '<div class="detail-grid-item">' + SVGI.calendar + '<div class="value">' + formatDate(p.postedDate) + '</div><div class="label">Posted</div></div>' +
+            '<div class="detail-grid-item">' + SVGI.eye + '<div class="value">' + p.views + '</div><div class="label">Views</div></div>' +
+            '<div class="detail-grid-item">' + SVGI.car + '<div class="value">' + (p.features.includes('Parking') ? 'Yes' : 'No') + '</div><div class="label">Parking</div></div>' +
+          '</div>' +
+        '</div>';
+
+      mainHTML +=
+        '<div class="detail-section">' +
+          '<h2 class="detail-section-title">Description</h2>' +
+          '<p class="detail-description">' + p.description + '</p>' +
+        '</div>';
+
+      mainHTML +=
+        '<div class="detail-section">' +
+          '<h2 class="detail-section-title">Features & Amenities</h2>' +
+          '<div class="features-list">' +
+            allFeatures.map(f =>
+              '<div class="feature-item">' +
+                (p.features.includes(f) ? SVGI.check : SVGI.xMark) +
+                '<span>' + f + '</span>' +
+              '</div>'
+            ).join('') +
+          '</div>' +
+        '</div>';
+
+      mainHTML +=
+        '<div class="detail-section">' +
+          '<h2 class="detail-section-title">Location</h2>' +
+          '<div style="margin-bottom: 12px; color: var(--text-muted);"><span style="color: var(--gold);">' + SVGI.mapPin + '</span> ' + p.address + '</div>' +
+          '<div class="map-placeholder">' + SVGI.mapMarked + '<br>Google Maps — ' + p.area + ', Faisalabad</div>' +
+        '</div>';
+
+      mainHTML +=
+        '<div class="detail-actions">' +
+          '<button class="btn ' + (isPropertySaved(p.id) ? 'btn-danger' : 'btn-outline') + '" id="save-btn" onclick="toggleSave(' + p.id + ')">' +
+            SVGI.heart + ' ' + (isPropertySaved(p.id) ? 'Saved' : 'Save') +
+          '</button>' +
+          '<button class="btn btn-whatsapp" onclick="shareWhatsApp(' + p.id + ')">' + SVGI.whatsapp + ' Share on WhatsApp</button>' +
+          '<button class="btn btn-dark" onclick="copyLink()">' + SVGI.link + ' Copy Link</button>' +
+        '</div>';
+
+      document.getElementById('detail-main').innerHTML = mainHTML;
+    }
+
+    function renderAgentSidebar(p) {
+      const agent = getAgentById(p.agentId);
+      if (!agent) return;
+
+      const whatsappMsg = encodeURIComponent("I'm interested in " + p.title + " at PKR " + p.priceDisplay + ". Please contact me.");
+
+      document.getElementById('detail-sidebar').innerHTML =
+        '<div class="agent-sidebar">' +
+          '<div class="agent-sidebar-card">' +
+            '<div class="agent-sidebar-header">' +
+              '<div class="agent-sidebar-avatar" style="background: ' + agent.color + ';">' + agent.name.split(' ').map(n => n[0]).join('') + '</div>' +
+              '<div>' +
+                '<div class="agent-sidebar-name">' + agent.name + (agent.verified ? ' ' + SVGI.checkCircle : '') + '</div>' +
+                '<div class="agent-sidebar-verified">' + agent.specialization + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="agent-sidebar-actions">' +
+              '<a href="tel:' + agent.phone + '" class="btn btn-primary">' + SVGI.phone + ' Call Agent</a>' +
+              '<a href="https://wa.me/' + agent.whatsapp + '?text=' + whatsappMsg + '" target="_blank" class="btn btn-whatsapp">' + SVGI.whatsapp + ' WhatsApp Inquiry</a>' +
+              '<button class="btn btn-outline" onclick="showToast(\'Visit scheduled! Agent will contact you soon.\')">' + SVGI.calendarCheck + ' Schedule Visit</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="agent-sidebar-card">' +
+            '<h3 style="font-family: var(--font-heading); margin-bottom: 12px;">Similar Properties</h3>' +
+            '<div id="sidebar-similar"></div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    function renderSimilarProperties(p) {
+      const similar = properties.filter(prop => prop.id !== p.id && (prop.area === p.area || prop.type === p.type)).slice(0, 3);
+      if (similar.length === 0) return;
+
+      document.getElementById('similar-section').innerHTML =
+        '<div class="container">' +
+          '<h2 class="section-title">Similar Properties</h2>' +
+          '<p class="section-subtitle">You might also be interested in these properties</p>' +
+          '<div class="properties-grid">' +
+            similar.map(prop => createPropertyCard(prop)).join('') +
+          '</div>' +
+        '</div>';
+    }
+
+    function toggleSave(id) {
+      if (isPropertySaved(id)) {
+        unsaveProperty(id);
+        showToast('Property removed from saved');
+      } else {
+        saveProperty(id);
+        showToast('Property saved!');
+      }
+      updateSavedCount();
+      const btn = document.getElementById('save-btn');
+      if (isPropertySaved(id)) {
+        btn.className = 'btn btn-danger';
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg> Saved';
+      } else {
+        btn.className = 'btn btn-outline';
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg> Save';
+      }
+    }
+
+    function shareWhatsApp(id) {
+      const p = getPropertyById(id);
+      const msg = encodeURIComponent("Check out this property on FSD Properties: " + p.title + " - PKR " + p.priceDisplay + " in " + p.area + ". " + window.location.href);
+      window.open('https://wa.me/?text=' + msg, '_blank');
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href);
+      showToast('Link copied to clipboard!');
+    }
+
+    var currentProperty = null;
+
+    function changeGalleryImage(index) {
+      if (!currentProperty || !currentProperty.images || !currentProperty.images[index]) return;
+      document.getElementById('gallery-main-img').src = currentProperty.images[index];
+      var thumbs = document.querySelectorAll('.gallery-thumb');
+      thumbs.forEach(function(t, i) {
+        t.classList.toggle('active', i === index);
+      });
+    }
+
+    function openLightbox() {
+      if (currentProperty && currentProperty.images && currentProperty.images.length > 0) {
+        document.getElementById('lightbox-img').src = currentProperty.images[0];
+      }
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    }
+  </script>
+</body>
+</html>

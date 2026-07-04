@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Submit Property — FSD Properties</title>
+  <meta name="description" content="List your property on Faisalabad's #1 property portal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-logo">
+        <svg class="logo-svg" width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 30L32 8L56 30V56H40V40H24V56H8V30Z" fill="#c9a84c" stroke="#1a1a1a" stroke-width="3"/>
+          <rect x="28" y="44" width="8" height="12" fill="#1a1a1a"/>
+          <circle cx="32" cy="26" r="4" fill="#1a1a1a"/>
+        </svg>
+        FSD <span>Properties</span>
+      </a>
+      <div class="navbar-links">
+        <a href="index.html">Home</a>
+        <a href="properties.html">Properties</a>
+        <a href="agents.html">Agents</a>
+        <a href="calculator.html">Calculator</a>
+        <a href="submit.html" class="active">Submit Property</a>
+      </div>
+      <a href="saved.html" class="navbar-saved" id="nav-saved">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        Saved (<span id="saved-count">0</span>)
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <button class="mobile-nav-close" id="mobile-nav-close">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="properties.html">Properties</a>
+    <a href="agents.html">Agents</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="submit.html">Submit Property</a>
+    <a href="saved.html">Saved Properties</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Submit Property</h1>
+      <p>List your property on Faisalabad's #1 portal</p>
+    </div>
+  </section>
+
+  <!-- SUBMIT FORM -->
+  <section class="submit-section">
+    <div class="container">
+      <div class="submit-card" id="submit-card">
+        <div class="form-steps" id="form-steps">
+          <div class="form-step-indicator active" data-step="1">
+            <span class="step-num">1</span>
+            <span>Basic Info</span>
+          </div>
+          <div class="form-step-indicator" data-step="2">
+            <span class="step-num">2</span>
+            <span>Details</span>
+          </div>
+          <div class="form-step-indicator" data-step="3">
+            <span class="step-num">3</span>
+            <span>Features</span>
+          </div>
+          <div class="form-step-indicator" data-step="4">
+            <span class="step-num">4</span>
+            <span>Contact</span>
+          </div>
+        </div>
+
+        <form id="property-form" onsubmit="return false;">
+          <!-- STEP 1: Basic Info -->
+          <div class="form-step active" id="step-1">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Property Type *</label>
+                <select id="submit-type" required>
+                  <option value="">Select Type</option>
+                  <option value="House">House</option>
+                  <option value="Apartment">Apartment</option>
+                  <option value="Plot">Plot</option>
+                  <option value="Shop">Shop</option>
+                  <option value="Office">Office</option>
+                  <option value="Warehouse">Warehouse</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Purpose *</label>
+                <select id="submit-purpose" required>
+                  <option value="">Select Purpose</option>
+                  <option value="Buy">Sell</option>
+                  <option value="Rent">Rent Out</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Property Title *</label>
+              <input type="text" id="submit-title" placeholder="e.g. Modern 10 Marla House in Susan Road" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Price (PKR) *</label>
+                <input type="number" id="submit-price" placeholder="e.g. 12000000" required>
+              </div>
+              <div class="form-group">
+                <label>Area/Location *</label>
+                <select id="submit-area" required>
+                  <option value="">Select Area</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Full Address</label>
+              <input type="text" id="submit-address" placeholder="e.g. Block A, Street 5, Susan Road">
+            </div>
+          </div>
+
+          <!-- STEP 2: Details -->
+          <div class="form-step" id="step-2">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Bedrooms</label>
+                <input type="number" id="submit-beds" placeholder="e.g. 4" min="0">
+              </div>
+              <div class="form-group">
+                <label>Bathrooms</label>
+                <input type="number" id="submit-baths" placeholder="e.g. 3" min="0">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Size *</label>
+                <input type="text" id="submit-size" placeholder="e.g. 10 Marla" required>
+              </div>
+              <div class="form-group">
+                <label>Floor</label>
+                <input type="text" id="submit-floor" placeholder="e.g. Ground + 1">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Furnishing</label>
+                <select id="submit-furnishing">
+                  <option value="Unfurnished">Unfurnished</option>
+                  <option value="Semi-Furnished">Semi-Furnished</option>
+                  <option value="Furnished">Furnished</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Available From</label>
+                <input type="date" id="submit-available">
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: Features -->
+          <div class="form-step" id="step-3">
+            <div class="form-group">
+              <label>Amenities</label>
+              <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox" value="Gas" class="submit-feature"> Gas</label>
+                <label class="checkbox-item"><input type="checkbox" value="Electricity" class="submit-feature"> Electricity</label>
+                <label class="checkbox-item"><input type="checkbox" value="Water" class="submit-feature"> Water</label>
+                <label class="checkbox-item"><input type="checkbox" value="Internet" class="submit-feature"> Internet</label>
+                <label class="checkbox-item"><input type="checkbox" value="Generator" class="submit-feature"> Generator</label>
+                <label class="checkbox-item"><input type="checkbox" value="Security" class="submit-feature"> Security</label>
+                <label class="checkbox-item"><input type="checkbox" value="Boundary Wall" class="submit-feature"> Boundary Wall</label>
+                <label class="checkbox-item"><input type="checkbox" value="Garden" class="submit-feature"> Garden</label>
+                <label class="checkbox-item"><input type="checkbox" value="Parking" class="submit-feature"> Parking</label>
+                <label class="checkbox-item"><input type="checkbox" value="Lift" class="submit-feature"> Lift</label>
+                <label class="checkbox-item"><input type="checkbox" value="Swimming Pool" class="submit-feature"> Swimming Pool</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description *</label>
+              <textarea id="submit-description" rows="6" placeholder="Property ki complete description likhein..." required></textarea>
+            </div>
+          </div>
+
+          <!-- STEP 4: Contact -->
+          <div class="form-step" id="step-4">
+            <div class="form-group">
+              <label>Owner/Agent Name *</label>
+              <input type="text" id="submit-name" placeholder="Your name" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" id="submit-phone" placeholder="e.g. 0300-1234567" required>
+              </div>
+              <div class="form-group">
+                <label>WhatsApp Number</label>
+                <input type="tel" id="submit-whatsapp" placeholder="e.g. 923001234567">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="submit-email" placeholder="your@email.com">
+            </div>
+          </div>
+
+          <div class="form-navigation">
+            <button type="button" class="btn btn-outline" id="prev-btn" onclick="prevStep()" style="display: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg> Previous
+            </button>
+            <button type="button" class="btn btn-primary" id="next-btn" onclick="nextStep()" style="margin-left: auto;">
+              Next <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </button>
+            <button type="button" class="btn btn-primary" id="submit-btn" onclick="submitProperty()" style="display: none; margin-left: auto;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Submit Property
+            </button>
+          </div>
+        </form>
+
+        <!-- SUCCESS MESSAGE -->
+        <div class="success-message" id="success-message" style="display: none;">
+          <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h2>Shukriya!</h2>
+          <p>Aapki property 24 ghante mein publish ho jayegi. Hamari team aap se raabta karegi.</p>
+          <a href="properties.html" class="btn btn-primary">Browse Properties</a>
+          <a href="index.html" class="btn btn-outline" style="margin-left: 8px;">Home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-brand">
+                        <svg class="logo-svg" width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 30L32 8L56 30V56H40V40H24V56H8V30Z" fill="#c9a84c" stroke="#1a1a1a" stroke-width="3"/>
+              <rect x="28" y="44" width="8" height="12" fill="#1a1a1a"/>
+              <circle cx="32" cy="26" r="4" fill="#1a1a1a"/>
+            </svg> FSD <span>Properties</span>
+          </div>
+          <p>Faisalabad's first dedicated premium property portal. Connecting buyers, sellers, renters, and agents since 2026.</p>
+          <div class="footer-social">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2z"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><path d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <div class="footer-links">
+            <a href="properties.html">Browse Properties</a>
+            <a href="agents.html">Our Agents</a>
+            <a href="calculator.html">Mortgage Calculator</a>
+            <a href="submit.html">Submit Property</a>
+            <a href="saved.html">Saved Properties</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Popular Areas</h4>
+          <div class="footer-links">
+            <a href="properties.html?area=Susan Road">Susan Road</a>
+            <a href="properties.html?area=Gulberg Colony">Gulberg Colony</a>
+            <a href="properties.html?area=Canal Road">Canal Road</a>
+            <a href="properties.html?area=Madina Town">Madina Town</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Contact Us</h4>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <span>+92 307 4851435</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            <span>+92 307 4851435</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>info@fsdproperties.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 <span>FSD Properties</span> — Faisalabad Ka #1 Property Portal. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span id="toast-message"></span>
+  </div>
+
+  <script src="js/icons.js"></script>`n  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const areaSelect = document.getElementById('submit-area');
+      faislalabadAreas.forEach(area => {
+        const opt = document.createElement('option');
+        opt.value = area;
+        opt.textContent = area;
+        areaSelect.appendChild(opt);
+      });
+    });
+
+    function nextStep() {
+      if (!validateStep(currentStep)) return;
+      if (currentStep < totalSteps) {
+        currentStep++;
+        updateStepUI();
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStepUI();
+      }
+    }
+
+    function updateStepUI() {
+      document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step-' + currentStep).classList.add('active');
+
+      document.querySelectorAll('.form-step-indicator').forEach(ind => {
+        const step = parseInt(ind.dataset.step);
+        ind.classList.remove('active', 'completed');
+        if (step === currentStep) ind.classList.add('active');
+        else if (step < currentStep) ind.classList.add('completed');
+      });
+
+      document.getElementById('prev-btn').style.display = currentStep === 1 ? 'none' : 'inline-flex';
+      document.getElementById('next-btn').style.display = currentStep === totalSteps ? 'none' : 'inline-flex';
+      document.getElementById('submit-btn').style.display = currentStep === totalSteps ? 'inline-flex' : 'none';
+    }
+
+    function validateStep(step) {
+      if (step === 1) {
+        const type = document.getElementById('submit-type').value;
+        const purpose = document.getElementById('submit-purpose').value;
+        const title = document.getElementById('submit-title').value;
+        const price = document.getElementById('submit-price').value;
+        const area = document.getElementById('submit-area').value;
+        if (!type || !purpose || !title || !price || !area) {
+          showToast('Please fill all required fields');
+          return false;
+        }
+      }
+      if (step === 3) {
+        const desc = document.getElementById('submit-description').value;
+        if (!desc) {
+          showToast('Please add a description');
+          return false;
+        }
+      }
+      if (step === 4) {
+        const name = document.getElementById('submit-name').value;
+        const phone = document.getElementById('submit-phone').value;
+        if (!name || !phone) {
+          showToast('Please fill all required fields');
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function submitProperty() {
+      if (!validateStep(4)) return;
+
+      const features = [];
+      document.querySelectorAll('.submit-feature:checked').forEach(cb => features.push(cb.value));
+
+      const data = {
+        title: document.getElementById('submit-title').value,
+        type: document.getElementById('submit-type').value,
+        purpose: document.getElementById('submit-purpose').value,
+        price: parseInt(document.getElementById('submit-price').value),
+        area: document.getElementById('submit-area').value,
+        address: document.getElementById('submit-address').value,
+        bedrooms: parseInt(document.getElementById('submit-beds').value) || 0,
+        bathrooms: parseInt(document.getElementById('submit-baths').value) || 0,
+        size: document.getElementById('submit-size').value,
+        floor: document.getElementById('submit-floor').value,
+        furnishing: document.getElementById('submit-furnishing').value,
+        description: document.getElementById('submit-description').value,
+        features: features,
+        ownerName: document.getElementById('submit-name').value,
+        phone: document.getElementById('submit-phone').value,
+        whatsapp: document.getElementById('submit-whatsapp').value,
+        email: document.getElementById('submit-email').value,
+        color: '#c9a84c'
+      };
+
+      addSubmittedProperty(data);
+
+      document.getElementById('property-form').style.display = 'none';
+      document.getElementById('form-steps').style.display = 'none';
+      document.getElementById('success-message').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
